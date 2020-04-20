@@ -44,12 +44,12 @@ public class JsonUtil {
     }
 
     /**
-     * plat fat json
+     * flat fat json
      *
      * @param jsonString
      * @return
      */
-    public static Map<String, Object> jsonPat(String jsonString) {
+    public static Map<String, Object> jsonFlat(String jsonString) {
         Map<String, Object> map = Maps.newHashMap();
         if (!isJsonString(jsonString)) {
             return map;
@@ -66,8 +66,8 @@ public class JsonUtil {
     /**
      * compare json is equal, <strong>true<strong/> if all null.ß
      *
-     * @param jsonString1
-     * @param jsonString2
+     * @param jsonString1 json string
+     * @param jsonString2 json string
      * @param strong      if json is a list, true means must keep the same seq
      * @return
      */
@@ -86,7 +86,7 @@ public class JsonUtil {
         return false;
     }
 
-    public static boolean compareJsonObject(JSONObject jsonObject1, JSONObject jsonObject2, boolean strong) {
+    private static boolean compareJsonObject(JSONObject jsonObject1, JSONObject jsonObject2, boolean strong) {
         if (null == jsonObject1 && null == jsonObject2) {
             return true;
         }
@@ -107,7 +107,7 @@ public class JsonUtil {
         return true;
     }
 
-    public static boolean compareJsonArray(JSONArray jsonArray1, JSONArray jsonArray2, boolean strong) {
+    private static boolean compareJsonArray(JSONArray jsonArray1, JSONArray jsonArray2, boolean strong) {
         if (null == jsonArray1 && null == jsonArray2) {
             return true;
         }

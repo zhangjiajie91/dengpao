@@ -24,16 +24,16 @@ public class JsonUtilTest {
     @Test
     public void emptyJsonPlatTest() {
         String jsonStr = null;
-        Map<String, Object> map = JsonUtil.jsonPat(jsonStr);
+        Map<String, Object> map = JsonUtil.jsonFlat(jsonStr);
 
         Assert.assertEquals(0, map.size());
 
         jsonStr = "";
-        map = JsonUtil.jsonPat(jsonStr);
+        map = JsonUtil.jsonFlat(jsonStr);
         Assert.assertEquals(0, map.size());
 
         jsonStr = "{}";
-        map = JsonUtil.jsonPat(jsonStr);
+        map = JsonUtil.jsonFlat(jsonStr);
         Assert.assertEquals(0, map.size());
     }
 
@@ -46,7 +46,7 @@ public class JsonUtilTest {
                 "  \"primary\" : \"false\",\n" +
                 "  \"replica\" : true\n" +
                 "}";
-        Map<String, Object> map = JsonUtil.jsonPat(jsonStr);
+        Map<String, Object> map = JsonUtil.jsonFlat(jsonStr);
 
         Assert.assertEquals(5, map.size());
         Assert.assertEquals("test3", map.get("index"));
@@ -73,7 +73,7 @@ public class JsonUtilTest {
                 "    }\n" +
                 "]";
 
-        Map<String, Object> map = JsonUtil.jsonPat(jsonStr);
+        Map<String, Object> map = JsonUtil.jsonFlat(jsonStr);
 
         Assert.assertEquals(6, map.size());
         Assert.assertEquals("172.17.15.205", map.get("[0].host"));
@@ -98,7 +98,7 @@ public class JsonUtilTest {
                 "    ]\n" +
                 "}";
 
-        map = JsonUtil.jsonPat(jsonStr);
+        map = JsonUtil.jsonFlat(jsonStr);
 
         Assert.assertEquals(6, map.size());
         Assert.assertEquals("172.17.15.205", map.get("shrinkNodeList[0].host"));
@@ -259,7 +259,7 @@ public class JsonUtilTest {
                 "  ]\n" +
                 "}";
 
-        Map<String, Object> map = JsonUtil.jsonPat(jsonStr);
+        Map<String, Object> map = JsonUtil.jsonFlat(jsonStr);
 
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             System.out.println(entry.getKey() + " : " + entry.getValue());

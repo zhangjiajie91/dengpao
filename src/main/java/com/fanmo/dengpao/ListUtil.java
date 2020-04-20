@@ -2,7 +2,9 @@ package com.fanmo.dengpao;
 
 import com.google.common.collect.Lists;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -60,13 +62,32 @@ public class ListUtil {
         if (!ignoreSeq) {
             return Objects.equals(list1, list2);
         }
-        if (isEmpty(list1) != isEmpty(list2)) {
-            return false;
-        }
-        if (isEmpty(list1)) {
+        if (null == list1 && null == list2) {
             return true;
         }
-        return list1.size() == list2.size() && list1.containsAll(list2) && list2.containsAll(list1);
+        if (null == list1 || null == list2 || list1.size() != list2.size()) {
+            return false;
+        }
+        Map<T, Integer> countMap1 = new HashMap<>();
+        Map<T, Integer> countMap2 = new HashMap<>();
+        for (T t : list1) {
+            if (!countMap1.containsKey(t)) {
+                countMap1.put(t, 0);
+            }
+            countMap1.put(t, countMap1.get(t) + 1);
+        }
+        for (T t : list2) {
+            if (!countMap2.containsKey(t)) {
+                countMap2.put(t, 0);
+            }
+            countMap2.put(t, countMap2.get(t) + 1);
+        }
+        for (T t : countMap1.keySet()) {
+            if (!countMap1.get(t).equals(countMap2.get(t))) {
+                return false;
+            }
+        }
+        return true;
     }
 
 
